@@ -1,0 +1,53 @@
+html,body{
+	display: flex;
+	height: 100vh;
+	flex-direction: column;
+}
+header{
+	text-align: center;
+	margin: 20px auto;
+}
+h1{
+	font:25px/30px '微软雅黑';
+}
+article{
+	width:450px;
+	margin:auto;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+
+}
+.registerTable{
+	margin-left:30px;
+}
+.message{
+	margin:14px 10px auto 18px;
+	width:14px;
+	height: 14px;
+	float: left;
+}
+.errorImage{
+	background: url(../img/small_icons.jpg) no-repeat -104px -12px/380px 380px;	
+}
+.successImage{
+	background: url(../img/small_icons.jpg) no-repeat -235px -306px/380px 380px;		
+}
+.errorMessage{
+	margin-top:12px;
+	color: red;
+	width:180px;
+}
+.successMessage{
+	margin-top:12px;
+	color:green;
+	width:180px;
+}
+input,select{
+	margin-top:8px;
+}
+
+#btnOperation{
+	margin-top:50px;
+	margin-bottom: 20px;
+	text-align: center;
+}

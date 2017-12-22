@@ -1,0 +1,113 @@
+html,body{
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	margin:0px;
+}
+header,footer,#navMainMenu,#sectionMainPage{
+	border: 1px solid #ccc;
+	margin:3px;
+	border-radius: 5px;
+}
+header{
+	height: 80px;
+}
+#headerOperation{
+	float: right;
+	margin-top:40px;
+	margin-right: 10px;
+}
+#headerOperation button{
+	margin:0px;
+}
+article{
+	flex-grow:1;
+	display: flex;
+	flex-direction: row;
+}
+footer{
+	height: 20px;
+}
+#navMainMenu{
+	width:150px;
+}
+#sectionMainPage{
+	flex-grow:1;
+	overflow: hidden;
+}
+iframe{
+	border: 0px;
+	width:100%;
+	height: 100%;
+	overflow: hidden;
+}
+ul li{
+	list-style: none;
+	text-shadow: -1px 0px;
+}
+ul{
+	padding:0px;
+	margin:auto 10px;
+}
+.ul_level1{
+	margin-top:5px;
+}
+.li_level1{
+	text-align: center;
+	margin-top:5px;
+	background-color: darkgrey;
+	color:#fff;
+	cursor:pointer;
+}
+.ul_level2{
+	border: 1px solid #CCCCCC;
+	margin:auto;
+}
+.li_level2{
+	text-align: center;
+	margin:0px auto 0 auto;
+	border:1px solid #CCCCCC;
+	cursor:pointer;
+}
+.li_level2:hover{
+	background-color:bisque;
+}
+li a:active{
+	text-decoration: none;
+	color: #000;
+}
+li a:hover{
+	text-decoration: none;
+	color: #000;
+}
+li a:visited{
+	text-decoration: none;
+	color: #000;
+}
+li a:link{
+	text-decoration: none;
+	color: #000;
+}
+#showAndHiddenOperation{
+	width:14px;
+	height: 14px;
+	float:right;
+	margin:6px 6px 0px 0px;
+	cursor:pointer;
+	background:url(../img/small_icons.jpg) no-repeat -55px -281px/350px 350px;
+}
+#footerShowAndHiddenOperation{
+	width:14px;
+	height: 14px;
+	float:right;
+	margin:2px 6px 0px 0px;
+	cursor:pointer;
+	background:url(../img/small_icons.jpg) no-repeat -55px -192px/350px 350px;
+}
+.trans{
+	transform:rotate(180deg);
+}
+
+
+
+

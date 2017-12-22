@@ -1,0 +1,32 @@
+html,body{
+	display: flex;
+	height: 100vh;
+	flex-direction: column;
+}
+article{
+	width:380px;
+	border:1px solid #ccc;
+	margin:auto;
+	border-radius:5px;
+}
+#logo{
+	width:110px;
+	height: 110px;
+	float: left;
+	margin:10px 30px auto 15px;
+	background: url(../img/login_logo.jpg) no-repeat 0px 0px/100px 110px;
+}
+#userLogin{
+	margin-top:10px;
+}
+input[type='password'],input[type='checkbox']{
+	margin-top:10px;
+}
+#loginOperation{
+	margin-top:20px;
+	margin-left:230px;
+}
+#loginErrorMessage{
+	margin-top:120px;
+	color: red;
+}

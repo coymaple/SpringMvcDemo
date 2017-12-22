@@ -1,0 +1,35 @@
+header{
+	border: 1px solid #CCCCCC;
+	margin: 3px auto;
+	padding-left:5px;
+}
+.simpleTable,.simpleTable td,.simpleTable th{
+	border: 1px solid #CCCCCC;
+	border-collapse: collapse;
+}
+.simpleTable{
+	width: 100%;
+}
+.simpleTable td{
+	text-align: center;
+}
+
+#curdOperation{
+	float:left;
+}
+#pageOperation{
+	float:right;
+}
+
+.simpleTable tbody tr[id]:nth-child(even){
+	background-color: blanchedalmond;
+}
+.simpleTable tbody tr[id]:hover{
+	background-color:aqua;
+}
+.simpleTable tbody tr th{
+	color:#fff;
+	background-color:darkgrey;
+}
+#btnTableAddUser{
+}

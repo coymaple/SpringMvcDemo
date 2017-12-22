@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>用户管理</title>
+		<link rel="stylesheet" type="text/css" href="../css/base.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/userManager.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/simple.css"/>
+		<script src="../js/userManager.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<article id="articleUserInfoTable">
+			<header>
+				用户管理模块 - 用户信息管理
+			</header>
+			<table class="simpleTable">
+				<thead >
+					<tr>
+						<td colspan="7" style="text-align: left;">
+							<input type="search" name="keyword" id="keyword"><button class="simpleButton">查询</button>
+						</td>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<td colspan="7">
+							<nav id="curdOperation" >
+								<button class="simpleButton" id="btnTableAddUser">新增</button>
+								<button class="simpleButton">修改</button>
+								<button class="simpleButton">删除</button>
+							</nav>
+							<nav id="pageOperation">
+								<button class="simpleButton">首页</button>
+								<button class="simpleButton">上一页</button>
+								<button class="simpleButton">下一页</button>
+								<button class="simpleButton">末页</button>
+							</nav>
+						</td>
+					</tr>					
+				</tfoot>
+				<tbody id="userInfoTbody">
+					<tr>
+						<th><input type="checkbox" name="allCheck" id="allCheck"></th>
+						<th>用户名</th>
+						<th>密码</th>
+						<th>性别</th>
+						<th>爱好</th>
+						<th>来自于</th>
+						<th>电子邮箱</th>
+					</tr>
+					<tr id="row_1">
+						<td><input type="checkbox" name="checks" value="1"></td>
+						<td>喜洋洋</td>
+						<td>123456</td>
+						<td>男</td>
+						<td>读书、听音乐</td>
+						<td>山东济南</td>
+						<td>yangyang@qq.com</td>
+					</tr>
+					<tr id="row_2">
+						<td><input type="checkbox" name="checks" value="2"></td>
+						<td>灰太狼</td>
+						<td>111111</td>
+						<td>男</td>
+						<td>运动</td>
+						<td>北京东城区</td>
+						<td>langlang@qq.com</td>
+					</tr>
+					<tr id="row_3">
+						<td><input type="checkbox" name="checks" value="3"></td>
+						<td>美洋洋</td>
+						<td>111111</td>
+						<td>女</td>
+						<td>读书</td>
+						<td>北京东城区</td>
+						<td>yangyang@qq.com</td>
+					</tr>
+					<tr id="row_4">
+						<td><input type="checkbox" name="checks" value="4"></td>
+						<td>懒洋洋</td>
+						<td>111111</td>
+						<td>男</td>
+						<td></td>
+						<td>北京东城区</td>
+						<td>yangyang@qq.com</td>
+					</tr>
+				</tbody>
+			</table>
+		</article>
+	</body>
+</html>
