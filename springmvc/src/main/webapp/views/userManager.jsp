@@ -34,7 +34,7 @@
 						<nav id="pageOperation">
 							<button class="simpleButton">首页</button>
 							<button class="simpleButton">上一页</button>
-							<button class="simpleButton">下一页</button>
+							<button class="simpleButton" id="btn_nextPage">下一页</button>
 							<button class="simpleButton">末页</button>
 						</nav>
 					</td>

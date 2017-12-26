@@ -12,6 +12,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.coymaple.dao.iface.UserDao;
+import com.coymaple.domain.Page;
 import com.coymaple.domain.User;
 import com.coymaple.domain.UserDetails;
 import com.coymaple.domain.UserForm;
@@ -78,6 +79,27 @@ public class UserJdbcDaoImpl implements UserDao {
 			new UserForm(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7))
 		);
 		return list;
+	}
+
+	@Override
+	public void queryUserForPage(Page<UserForm> page, String keyword) {
+		List<UserForm> list = new ArrayList<>();
+		Object[] params = null;
+		StringBuffer sqlBuf = new StringBuffer("");
+		sqlBuf.append("select * from (select bt.*,rowNum rn from ( ");
+		sqlBuf.append("select u.id id,u.name name,u.password password,u.sex sex,u.email email,np.name nativePlaceName,ud.hobby_code hobbyCode from users u  left outer join UserDetails ud on u.id=ud.id ");
+		if("".equals(keyword)) {
+			sqlBuf.append("left outer join nativePlace np on ud.nativePlace_code=np.code ");
+			params = new Object[] {page.getCurrentPage(),page.getRowNumber(),page.getCurrentPage(),page.getRowNumber()};
+		}else {
+			sqlBuf.append("left outer join nativePlace np on ud.nativePlace_code=np.code where u.name like ?");
+			params = new Object[] {"%"+keyword+"%",page.getCurrentPage(),page.getRowNumber(),page.getCurrentPage(),page.getRowNumber()};
+		}
+		sqlBuf.append(" ) bt where rowNum<(?)*?) mt where rn>(?-1)*?");
+		list = jdbcTemplate.query(sqlBuf.toString(),(rs,index)->
+			new UserForm(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7))	
+		,params);
+		page.setPageList(list);
 	}
 
 }

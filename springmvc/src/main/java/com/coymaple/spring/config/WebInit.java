@@ -18,7 +18,7 @@ public class WebInit implements WebApplicationInitializer{
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext();
-		applicationContext.register(AppConfig.class,MvcConfig.class,JsonConverter.class);
+		applicationContext.register(AppConfig.class,MvcConfig.class,JsonConverterConfig.class);
 		applicationContext.setServletContext(servletContext);
 		
 		FilterRegistration.Dynamic charFilter=servletContext.addFilter("encodingFilter", new CharacterEncodingFilter());

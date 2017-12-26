@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.coymaple.domain.Permission;
 import com.coymaple.domain.User;
 import com.coymaple.domain.UserDetails;
 import com.coymaple.domain.UserForm;
+import com.coymaple.services.iface.PermissionService;
 import com.coymaple.services.iface.UserService;
 
 @Controller
@@ -20,6 +22,8 @@ public class UserController {
 	
 	@Resource
 	private UserService userService;
+	@Resource
+	private PermissionService permissionService;
 	
 
 //	@RequestMapping("/userLogin")
@@ -50,6 +54,10 @@ public class UserController {
 		ModelAndView mav = new ModelAndView("login");
 		if(userService.checkUser(userName, password)) {
 			request.getSession().setAttribute("user", userName);
+			mav.addObject("permissions", permissionService.showPerssion());
+//			for(Permission per:permissionService.showPerssion()){
+//				System.out.println(per.getUrl());
+//			}
 			mav.setViewName("views/main");
 		}else {
 			mav.addObject("message","用户名或密码错误");
@@ -61,7 +69,6 @@ public class UserController {
 	public ModelAndView userRegesitory(HttpServletRequest request) {
 		String userName=null==request.getParameter("userName")?"":request.getParameter("userName");
 		String password=null==request.getParameter("password")?"":request.getParameter("password");
-		String rePassword=null==request.getParameter("rePassword")?"":request.getParameter("rePassword");
 		String sex=null==request.getParameter("sex")?"":request.getParameter("sex");
 		String city=null==request.getParameter("city")?"":request.getParameter("city");
 		String email=null==request.getParameter("email")?"":request.getParameter("email");
@@ -78,10 +85,8 @@ public class UserController {
 				hobbyString += hobby[i];
 			}
 		}
-//		System.out.println(hobbyString);
 		User user = new User(userName,password,sex,email);
 		UserDetails ud = new UserDetails(city,hobbyString);
-//		System.out.println("插入数据前");
 		if(userService.addUser(user, ud)) {
 			mav.addObject("result","success");
 			mav.addObject("message","用户注册成功");
@@ -89,12 +94,11 @@ public class UserController {
 			mav.addObject("result","fail");
 			mav.addObject("message","用户注册失败");
 		}
-//		System.out.println("插入数据后");
 		return mav;
 	}
 	
 	@RequestMapping("userInit")
-	public ModelAndView userInit() {
+	public ModelAndView userInit(@RequestParam(name="currentPage",defaultValue="1") String currentPage) {
 		ModelAndView mav = new ModelAndView("views/userManager");
 		List<UserForm> list = userService.showUser();
 		System.out.println(list.toString());

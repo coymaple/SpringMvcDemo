@@ -23,6 +23,7 @@ public class HobbyController {
 	@Resource
 	private HobbyService hobbyService;
 	
+	//使用servlet 的out对象往前端发送数据
 //	@RequestMapping(value="hobbyInit")
 //	public void initHobby(HttpServletResponse response) {
 //		response.setCharacterEncoding("utf-8");
@@ -67,7 +68,8 @@ public class HobbyController {
 //	}
 	
 	@ResponseBody
-	@RequestMapping(value="/hobbyInit",produces="application/json;charset=utf-8")
+	@RequestMapping(value="/hobbyInit")
+//	@RequestMapping(value="/hobbyInit",produces="application/json;charset=utf-8")
 	public Map<String,Object> initHobby(HttpServletResponse response){
 		Map<String,Object> map=new HashMap<String,Object>();
 		List<Hobby> list=hobbyService.hobbyShow();

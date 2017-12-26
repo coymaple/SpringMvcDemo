@@ -5,6 +5,11 @@ function rowSelectOperation(event){
 	}
 }
 function init(){
+	//nextPage
+	document.getElementById("btn_nextPage").addEventListener("click",()=>{
+		window.location.href = "userManager.mvc?currentPage=" +1;
+	},false);
+	
 	//row select
 	document.getElementById("userInfoTbody").addEventListener("click",rowSelectOperation,false);
 	//all select

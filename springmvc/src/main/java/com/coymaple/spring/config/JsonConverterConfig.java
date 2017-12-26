@@ -8,14 +8,16 @@ import javax.annotation.Resource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 
 @Configuration
-public class JsonConverter {
+public class JsonConverterConfig {
 	
 	@Resource
 	MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -42,5 +44,15 @@ public class JsonConverter {
 		fjhmc.setSupportedMediaTypes(list);
 		fjhmc.setFastJsonConfig(fastJsonConfig);
 		return fjhmc;
+	}
+	
+	@Bean
+	public RequestMappingHandlerAdapter requestMappingHandlerAdapter () {
+		RequestMappingHandlerAdapter rmha = new RequestMappingHandlerAdapter();
+		List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
+//		messageConverters.add(jacksonMessageConverter);
+		messageConverters.add(fastJsonMessageConverter);
+		rmha.setMessageConverters(messageConverters);
+		return rmha;
 	}
 }

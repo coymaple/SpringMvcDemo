@@ -11,10 +11,11 @@ insert into hobby values(hobby_id.nextval,'读书',3);
 insert into hobby values(hobby_id.nextval,'爬山',4);
 insert into hobby values(hobby_id.nextval,'写作',5);
 commit;
-
+-- 查询 hobby 表
 select * from hobby; 
-
+-- 删除 hobby 表
 drop table hobby; 
+-- 删除 hobby_id 序列
 drop sequence hobby_id;
 
 -- 创建城市和省份表
@@ -83,5 +84,104 @@ select * from userDetails;
 
 select * from users;
 
+-- 两张表之间的连接 user 和 userDetail 左连接。
 select u.id,u.name,u.password,u.sex,u.email,np.name,ud.hobby_code from users u  left outer join UserDetails ud on u.id=ud.id 
+left outer join nativePlace np on ud.nativePlace_code=np.code where u.name like 't%';
+
+-- 创建权限表 permission 
+create table permission(
+    id number(10) primary key,
+    url varchar2(200) default '',
+    name varchar2(50),
+    parentId number(10),
+    remark varchar2(200) default ''
+);
+-- 创建 permission_id 序列
+create sequence permission_id start with 1 increment by 1 minvalue 0 ;
+insert into permission (id,name,parentId) values (permission_id.nextval,'用户管理模块',0);
+insert into permission (id,name,parentId) values (permission_id.nextval,'邮件管理模块',0);
+select * from permission;
+insert into permission values (permission_id.nextval,'userInit.mvc','用户信息管理',1,'用户信息管理');
+insert into permission values (permission_id.nextval,'#','用户权限管理',1,'用户权限管理');
+insert into permission values (permission_id.nextval,'#','用户角色管理',1,'用户角色管理');
+insert into permission values (permission_id.nextval,'#','收邮件',2,'收邮件');
+insert into permission values (permission_id.nextval,'#','写邮件',2,'写邮件');
+insert into permission values (permission_id.nextval,'#','垃圾邮件',2,'垃圾邮件');
+commit;
+
+drop sequence permission_id;
+drop table permission;
+
+-- 分页
+select * from users;
+-- 分页需要的数据：当前要显示页的页数（currentPage），每页的行数（固定的数据,rowNumber）。
+-- 分页公式：(currentPage-1)*rowNumber
+-- oracle 分页特殊性：利用 rowNum 进行分页，该数据只能小于不能大于。
+select u.*,rowNum from users u where rowNum>1; --无数据
+-- 原因：rowNum是在表生成的阶段自动生成的，如果大于某个值，rowNum永远不可能大于1
+-- 当前页为第二页
+--1,获取要分页的数据
+select * from users;
+--2，去尾
+select bt.*,rowNum rn from (select * from users) bt where rowNum<(2)*2;
+--3，去头,获得最终数据
+select * from (select bt.*,rowNum rn from (select * from users) bt where rowNum<(2)*2) mt where rn>(2-1)*2;
+
+
+-- 业务分页
+select * from (select bt.*,rowNum rn from ( 
+ select u.id id,u.name name,u.password password,u.sex sex,u.email email,np.name nativePlaceName,ud.hobby_code hobbyCode from users u  left outer join UserDetails ud on u.id=ud.id 
+left outer join nativePlace np on ud.nativePlace_code=np.code 
+ ) bt where rowNum<(2)*2) mt where rn>(2-1)*2;
+-- 带查询的业务分页
+select * from (select bt.*,rowNum rn from ( 
+ select u.id id,u.name name,u.password password,u.sex sex,u.email email,np.name nativePlaceName,ud.hobby_code hobbyCode from users u  left outer join UserDetails ud on u.id=ud.id 
+left outer join nativePlace np on ud.nativePlace_code=np.code where u.name like 't'
+ ) bt where rowNum<(2)*2) mt where rn>(2-1)*2;
+
+-- 获取总行数。 count(1) 可被替换为 count(*)， 区别在于 count(1) 效率更高
+ select count(1) from users u  left outer join UserDetails ud on u.id=ud.id 
 left outer join nativePlace np on ud.nativePlace_code=np.code;
+
+
+create table role(
+	id number(10) primary key,
+	name varchar2(50),
+	remark varchar2(200)
+);
+
+insert into role values (role_id.nextval,"用户管理","用户权限管理");
+
+create table userRole(
+	id mumber(10) primary key,
+	usersId number(10) reference users(id),
+	roleId number(10) reference role(id)
+);
+
+
+
+create table rolePermission(
+	id mumber(10) primary key,
+	permissionId number(10) reference permission(id),
+	roleId number(10) reference role(id)
+);
+
+insert into rolePermission values(rolePermission_id.nextval,3,1);
+insert into rolePermission values(rolePermission_id.nextval,4,1);
+insert into rolePermission values(rolePermission_id.nextval,5,1);
+commit;
+
+
+insert into userRole values (usserRole_id.nextVal,1,1);
+commit;
+
+select * from user u  left outer join userRole ur on u.id=ur.usersId
+left outer join rolePermission rp on ur.id=rp.permissionId
+left outer join  permission p on p.id=up.permission
+where u.id=1;
+
+
+
+
+
+
