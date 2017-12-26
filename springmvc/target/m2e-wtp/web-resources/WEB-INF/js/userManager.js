@@ -6,8 +6,13 @@ function rowSelectOperation(event){
 }
 function init(){
 	//nextPage
-	document.getElementById("btn_nextPage").addEventListener("click",()=>{
-		window.location.href = "userManager.mvc?currentPage=" +1;
+	document.getElementById("btn_nextPage").addEventListener("click",(event)=>{
+		window.location.href = "userInit.mvc?currentPage=" +(Number.parseInt(document.getElementById("spanCurrentPage").innerHTML)+1);
+	},false);
+	
+	//previousPage
+	document.getElementById("btn_previousPage").addEventListener("click",(event)=>{
+		window.location.href = "userInit.mvc?currentPage=" +(Number.parseInt(document.getElementById("spanCurrentPage").innerHTML)-1);
 	},false);
 	
 	//row select

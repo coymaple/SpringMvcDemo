@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.coymaple.domain.Page;
 import com.coymaple.domain.Permission;
 import com.coymaple.domain.User;
 import com.coymaple.domain.UserDetails;
@@ -97,12 +98,23 @@ public class UserController {
 		return mav;
 	}
 	
+	//未加分页时的操作
+//	@RequestMapping("userInit")
+//	public ModelAndView userInit(@RequestParam(name="currentPage",defaultValue="1") String currentPage) {
+//		ModelAndView mav = new ModelAndView("views/userManager");
+//		List<UserForm> list = userService.showUser();
+//		System.out.println(list.toString());
+//		mav.addObject("list",list);
+//		return mav;
+//	}
+	
 	@RequestMapping("userInit")
-	public ModelAndView userInit(@RequestParam(name="currentPage",defaultValue="1") String currentPage) {
+	public ModelAndView userInit(@RequestParam(name="currentPage",defaultValue="1") String currentPage,@RequestParam(name="keyword",defaultValue="")String keyword) {
+		Page page = new Page();
+		page.setCurrentPage(Integer.parseInt(currentPage));
 		ModelAndView mav = new ModelAndView("views/userManager");
-		List<UserForm> list = userService.showUser();
-		System.out.println(list.toString());
-		mav.addObject("list",list);
+		userService.showUserForPage(page, keyword);
+		mav.addObject("page",page);
 		return mav;
 	}
 	

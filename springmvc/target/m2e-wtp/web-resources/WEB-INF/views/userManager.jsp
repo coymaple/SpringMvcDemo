@@ -31,9 +31,11 @@
 							<button class="simpleButton">修改</button>
 							<button class="simpleButton">删除</button>
 						</nav>
+						<%--${page.totalRow/page.rowNumber } --%>
 						<nav id="pageOperation">
+							第<span id="spanCurrentPage">${page.currentPage }</span>每页${page.rowNumber }行&nbsp;&nbsp;共页
 							<button class="simpleButton">首页</button>
-							<button class="simpleButton">上一页</button>
+							<button class="simpleButton" id="btn_previousPage">上一页</button>
 							<button class="simpleButton" id="btn_nextPage">下一页</button>
 							<button class="simpleButton">末页</button>
 						</nav>
@@ -51,7 +53,7 @@
 					<th>hobby</th>
 				</tr>
 				
-				<c:forEach items="${list }" var="user">
+				<c:forEach items="${page.getPageList() }" var="user">
 					<tr id="row_${user.id }">
 						<td><input type="checkbox" name="checks" id="${user.id }"></td>
 						<td>${user.name }</td>

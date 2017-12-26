@@ -35,7 +35,7 @@ public class UserJdbcDaoImplTest {
 	@Test
 	public void queryUserForPageTest() {
 		Page<UserForm> page = new Page<>();
-		page.setCurrentPage(2);
+		page.setCurrentPage(1);
 		userDao.queryUserForPage(page, "");
 		for(UserForm uf:page.getPageList()) {
 			System.out.println(uf.getName());

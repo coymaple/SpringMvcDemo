@@ -95,7 +95,7 @@ public class UserJdbcDaoImpl implements UserDao {
 			sqlBuf.append("left outer join nativePlace np on ud.nativePlace_code=np.code where u.name like ?");
 			params = new Object[] {"%"+keyword+"%",page.getCurrentPage(),page.getRowNumber(),page.getCurrentPage(),page.getRowNumber()};
 		}
-		sqlBuf.append(" ) bt where rowNum<(?)*?) mt where rn>(?-1)*?");
+		sqlBuf.append(" ) bt where rowNum<=(?)*?) mt where rn>(?-1)*?");
 		list = jdbcTemplate.query(sqlBuf.toString(),(rs,index)->
 			new UserForm(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7))	
 		,params);

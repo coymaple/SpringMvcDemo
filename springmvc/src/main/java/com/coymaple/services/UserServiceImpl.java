@@ -6,7 +6,10 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.coymaple.dao.iface.HobbyDao;
 import com.coymaple.dao.iface.UserDao;
+import com.coymaple.domain.Hobby;
+import com.coymaple.domain.Page;
 import com.coymaple.domain.User;
 import com.coymaple.domain.UserDetails;
 import com.coymaple.domain.UserForm;
@@ -17,6 +20,8 @@ public class UserServiceImpl implements UserService{
 
 	@Resource
 	private UserDao userDao;
+	@Resource
+	private HobbyDao hobbyDao;
 	
 	@Override
 	public boolean checkUser(String userName, String password) {
@@ -50,11 +55,31 @@ public class UserServiceImpl implements UserService{
 		}
 		return flag;
 	}
+	
+	public void replaceHobbyName(List<UserForm> list) {
+		List<Hobby> hobbys = hobbyDao.getAllHobby();
+		for(Hobby hobby:hobbys) {
+			for(UserForm uf:list) {
+				String hobbyStr = uf.getHobby();
+				if(hobbyStr != null && hobbyStr.indexOf(String.valueOf(hobby.getCode()))!=-1) {
+					String newHobbyStr = hobbyStr.replace(String.valueOf(hobby.getCode()), hobby.getName());
+					uf.setHobby(newHobbyStr);
+				}
+			}
+		}
+	}
 
 	@Override
 	public List<UserForm> showUser() {
 		List<UserForm> list = userDao.queryUserAll();
+		this.replaceHobbyName(list);
 		return list;
+	}
+
+	@Override
+	public void showUserForPage(Page<UserForm> page,String keyword) {
+		userDao.queryUserForPage(page, keyword);;
+		this.replaceHobbyName(page.getPageList());
 	}
 
 }
