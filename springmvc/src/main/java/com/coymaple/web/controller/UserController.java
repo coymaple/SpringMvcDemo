@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.coymaple.dao.iface.PageDao;
 import com.coymaple.domain.Page;
 import com.coymaple.domain.Permission;
 import com.coymaple.domain.User;
@@ -25,6 +26,8 @@ public class UserController {
 	private UserService userService;
 	@Resource
 	private PermissionService permissionService;
+	@Resource
+	private PageDao pageDao;
 	
 
 //	@RequestMapping("/userLogin")
@@ -108,9 +111,12 @@ public class UserController {
 //		return mav;
 //	}
 	
+	//有分页时的操作
 	@RequestMapping("userInit")
 	public ModelAndView userInit(@RequestParam(name="currentPage",defaultValue="1") String currentPage,@RequestParam(name="keyword",defaultValue="")String keyword) {
 		Page page = new Page();
+		pageDao.setTotaoRows(page);
+		page.setTotalPage(page.getTotalRows(),page.getRowNumber());
 		page.setCurrentPage(Integer.parseInt(currentPage));
 		ModelAndView mav = new ModelAndView("views/userManager");
 		userService.showUserForPage(page, keyword);

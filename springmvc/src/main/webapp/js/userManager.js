@@ -5,19 +5,34 @@ function rowSelectOperation(event){
 	}
 }
 function init(){
-	//nextPage
+	
+	var totalPage = Number.parseInt(document.getElementById("spanTotalPage").innerText);
+	var currentPage = Number.parseInt(document.getElementById("spanCurrentPage").innerText);
+	
+	// nextPage
 	document.getElementById("btn_nextPage").addEventListener("click",(event)=>{
-		window.location.href = "userInit.mvc?currentPage=" +(Number.parseInt(document.getElementById("spanCurrentPage").innerHTML)+1);
+		if(currentPage>=1 && currentPage<totalPage){
+			currentPage = currentPage + 1;
+			window.location.href = "userInit.mvc?currentPage=" + currentPage;
+			//定义按钮不能被按下
+//			if(currentPage == totalPage){
+//				document.getElementById("btn_nextPage").disable = "disabled";
+//				console.log("currentPage = totalPage");
+//			}
+		}
 	},false);
 	
-	//previousPage
+	// previousPage
 	document.getElementById("btn_previousPage").addEventListener("click",(event)=>{
-		window.location.href = "userInit.mvc?currentPage=" +(Number.parseInt(document.getElementById("spanCurrentPage").innerHTML)-1);
+		if(currentPage>1 && currentPage<=totalPage){
+			currentPage = currentPage - 1;
+			window.location.href = "userInit.mvc?currentPage=" + currentPage;
+		}
 	},false);
 	
-	//row select
+	// row select
 	document.getElementById("userInfoTbody").addEventListener("click",rowSelectOperation,false);
-	//all select
+	// all select
 	document.getElementById("allCheck").addEventListener("change",(event)=>{
 		let allCheck=event.target;
 		let arrays=document.getElementsByName("checks");

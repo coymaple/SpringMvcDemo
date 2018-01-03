@@ -40,7 +40,6 @@
 		}
 	}
 	function hobbyInitCallbak(xhr){
-//		console.log(xhr.responseText);
 		let json=JSON.parse(xhr.responseText);
 		let insertPoint=document.getElementById("hobbyInsertPoint");
 		if(json.result=="success"){
@@ -63,7 +62,6 @@
 		}		
 	}
 	function npInitCallback(xhr){
-//		console.log(xhr.responseText);
 		let json = JSON.parse(xhr.responseText);
 		let province = document.getElementById("province");
 		if(json.result=="success"){
@@ -85,6 +83,7 @@
 	function npCityCallback(xhr){
 		let json = JSON.parse(xhr.responseText);
 		let city = document.getElementById("city");
+		city.length = 1;
 		if(json.result == "success"){
 			json.list.forEach((item)=>{
 				if(item.code.substr(0,2) == document.getElementById("province").value){

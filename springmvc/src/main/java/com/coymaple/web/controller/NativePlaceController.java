@@ -44,7 +44,6 @@ public class NativePlaceController {
 		}
 		
 		String jsonString = JSON.toJSONString(map);
-		System.out.println(jsonString);
 		out.println(jsonString);
 		out.flush();
 		out.close();
@@ -71,7 +70,6 @@ public class NativePlaceController {
 		}
 		
 		String jsonString = JSON.toJSONString(map);
-		System.out.println(jsonString);
 		out.println(jsonString);
 		out.flush();
 		out.close();

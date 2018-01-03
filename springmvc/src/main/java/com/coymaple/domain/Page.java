@@ -5,11 +5,18 @@ import java.util.List;
 import com.coymaple.Contants;
 
 public class Page<T> {
+	
+	//当前页
 	private int currentPage;
+	//每页的行数
 	private int rowNumber = Contants.ROW_NUMBER;
+	//总行数
 	private int totalRows;
+	//总页数
 	private int totalPage;
+	
 	private List<T> pageList;
+	
 	public int getCurrentPage() {
 		return currentPage;
 	}
@@ -31,8 +38,13 @@ public class Page<T> {
 	public int getTotalPage() {
 		return totalPage;
 	}
-	public void setTotalPage(int totalPage) {
-		this.totalPage = totalPage;
+	public void setTotalPage(int totalPage,int rowNumber) {
+		int result = totalPage % rowNumber;
+		if(result == 0) {
+			this.totalPage = totalPage/rowNumber;
+		}else {
+			this.totalPage = totalPage/rowNumber + 1;
+		}
 	}
 	public List<T> getPageList() {
 		return pageList;
@@ -40,5 +52,7 @@ public class Page<T> {
 	public void setPageList(List<T> pageList) {
 		this.pageList = pageList;
 	}
+	
+	
 	
 }

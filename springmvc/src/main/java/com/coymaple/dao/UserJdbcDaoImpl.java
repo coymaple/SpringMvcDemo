@@ -89,10 +89,10 @@ public class UserJdbcDaoImpl implements UserDao {
 		sqlBuf.append("select * from (select bt.*,rowNum rn from ( ");
 		sqlBuf.append("select u.id id,u.name name,u.password password,u.sex sex,u.email email,np.name nativePlaceName,ud.hobby_code hobbyCode from users u  left outer join UserDetails ud on u.id=ud.id ");
 		if("".equals(keyword)) {
-			sqlBuf.append("left outer join nativePlace np on ud.nativePlace_code=np.code ");
+			sqlBuf.append("left outer join nativePlace np on ud.nativePlace_code=np.code order by u.id");
 			params = new Object[] {page.getCurrentPage(),page.getRowNumber(),page.getCurrentPage(),page.getRowNumber()};
 		}else {
-			sqlBuf.append("left outer join nativePlace np on ud.nativePlace_code=np.code where u.name like ?");
+			sqlBuf.append("left outer join nativePlace np on ud.nativePlace_code=np.code where u.name like ? order by u.id ");
 			params = new Object[] {"%"+keyword+"%",page.getCurrentPage(),page.getRowNumber(),page.getCurrentPage(),page.getRowNumber()};
 		}
 		sqlBuf.append(" ) bt where rowNum<=(?)*?) mt where rn>(?-1)*?");
