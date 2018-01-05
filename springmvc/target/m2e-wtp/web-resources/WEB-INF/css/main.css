@@ -30,6 +30,7 @@ footer{
 }
 #navMainMenu{
 	width:150px;
+	height:500px;
 }
 #sectionMainPage{
 	flex-grow:1;

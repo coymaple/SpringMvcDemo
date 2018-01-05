@@ -81,6 +81,7 @@ public class UserJdbcDaoImpl implements UserDao {
 		return list;
 	}
 
+	//数据库数据分页
 	@Override
 	public void queryUserForPage(Page<UserForm> page, String keyword) {
 		List<UserForm> list = new ArrayList<>();

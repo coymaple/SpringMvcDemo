@@ -23,38 +23,24 @@
 			<nav id="navMainMenu">
 				<div id="showAndHiddenOperation" class="trans"></div>
 				<h1 style="text-align: center; margin-top: 5px;">系统主菜单</h1>
-
+				<!-- 未使用标准标签库的列表见网址 
+					https://github.com/coymaple/SpringMvcDemo/blob/master2/README.md -->
 				<ul class="ul_level1">
 					<c:forEach items="${permissions }" var="parentPermission">
 						<c:if test="${parentPermission.parentId==0 }">
 							<li class="li_level1">${parentPermission.name }</li>
-							 <ul class="ul_level2">
+							<ul class="ul_level2">
 								<c:forEach items="${permissions }" var="permission">
-									<c:if test="${permission.parentId !=0 && parentPermission.id == permission.parentId }">
-										<li class="li_level2"><a href="${permission.url }" target="mainIframe">${permission.name }</a></li>
+									<c:if
+										test="${permission.parentId !=0 && parentPermission.id == permission.parentId }">
+										<li class="li_level2"><a href="${permission.url }"
+											target="mainIframe">${permission.name }</a></li>
 									</c:if>
 								</c:forEach>
 							</ul>
 						</c:if>
 					</c:forEach>
 				</ul>
-				<!-- 
-				<ul class="ul_level1">
-					<li class="li_level1">用户管理模块</li>
-					<ul class="ul_level2">
-						<li class="li_level2"><a href="userInit.mvc"
-							target="mainIframe">用户信息管理</a></li>
-						<li class="li_level2">用户权限管理</li>
-						<li class="li_level2">用户角色管理</li>
-					</ul>
-					<li class="li_level1">邮件管理模块</li>
-					<ul class="ul_level2">
-						<li class="li_level2"><a href="#" target="mainIframe">收邮件</a></li>
-						<li class="li_level2">写邮件</li>
-						<li class="li_level2">垃圾邮件</li>
-					</ul>
-				</ul>
-				 -->
 			</nav>
 			<section id="sectionMainPage">
 				<iframe name="mainIframe" src="views/welcome.jsp"></iframe>

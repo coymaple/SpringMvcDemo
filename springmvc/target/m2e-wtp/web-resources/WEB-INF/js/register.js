@@ -39,6 +39,7 @@
 			messageToggle("password",true,"密码符合要求！");
 		}
 	}
+	
 	function hobbyInitCallbak(xhr){
 		let json=JSON.parse(xhr.responseText);
 		let insertPoint=document.getElementById("hobbyInsertPoint");

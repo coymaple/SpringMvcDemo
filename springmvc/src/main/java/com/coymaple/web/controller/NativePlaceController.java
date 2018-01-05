@@ -23,8 +23,12 @@ public class NativePlaceController {
 	@Resource
 	private NativePlaceDao nativePlaceDao;
 	
+	//使用 @ResponseBody 前的方法见下面的网址
+	//https://github.com/coymaple/SpringMvcDemo/blob/master2/README.md
+	
+	@ResponseBody
 	@RequestMapping(value="/npInit")
-	public void initProvince(HttpServletResponse response) {
+	public Map<String,Object> initProvince(HttpServletResponse response){
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charest=utf-8");
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -35,22 +39,12 @@ public class NativePlaceController {
 		}else {
 			map.put("result", "fail");
 		}
-		PrintWriter out = null;
-		try {
-			out = response.getWriter();
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		String jsonString = JSON.toJSONString(map);
-		out.println(jsonString);
-		out.flush();
-		out.close();
+		return map;
 	}
 	
+	@ResponseBody
 	@RequestMapping(value="/npCity")
-	public void initCity(HttpServletResponse response) {
+	public Map initCity(HttpServletResponse response) {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charest=utf-8");
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -61,35 +55,12 @@ public class NativePlaceController {
 		}else {
 			map.put("result", "fail");
 		}
-		PrintWriter out = null;
-		try {
-			out = response.getWriter();
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		String jsonString = JSON.toJSONString(map);
-		out.println(jsonString);
-		out.flush();
-		out.close();
+		return map;
 	}
 	
-//	@ResponseBody
-//	@RequestMapping(value="/npInit")
-//	public Map<String,Object> initProvince(HttpServletResponse response){
-//		response.setCharacterEncoding("utf-8");
-//		response.setContentType("text/html;charest=utf-8");
-//		Map<String,Object> map = new HashMap<String,Object>();
-//		List<NativePlace> list = nativePlaceDao.getProvinces();
-//		if(list.size() != 0) {
-//			map.put("result", "success");
-//			map.put("list", list);
-//		}else {
-//			map.put("result", "fail");
-//		}
-//		return map;
-//	}
+
+	
+	
 	
 	
 }

@@ -29,28 +29,8 @@ public class UserController {
 	@Resource
 	private PageDao pageDao;
 	
-
-//	@RequestMapping("/userLogin")
-//	public String userNameCheck(HttpServletRequest request) {
-//		String forward="index";
-//		String userName = null == request.getParameter("userName")?"":request.getParameter("userName");
-//		String password = null == request.getParameter("password")?"":request.getParameter("password");
-//		if("admin".equals(userName)&&"admin".equals(password)) {
-//			forward = "views/main";
-//		}
-//		return forward;
-//	}
-	
-//	@RequestMapping("/userLogin")
-//	public String userNameCheck(HttpServletRequest request) {
-//		String forward="index";
-//		String userName = null == request.getParameter("userName")?"":request.getParameter("userName");
-//		String password = null == request.getParameter("password")?"":request.getParameter("password");
-//		if(userService.checkUser(userName, password)) {
-//			forward = "views/main";
-//		}
-//		return forward;
-//	}
+	//各种返回值的 @RequestMapping("/userLogin") 注解的方法见下面的网址
+	//https://github.com/coymaple/SpringMvcDemo/blob/master2/README.md
 	
 	//用 @RequestParam 注解得到表单内容的值。
 	@RequestMapping("/userLogin")
@@ -59,9 +39,6 @@ public class UserController {
 		if(userService.checkUser(userName, password)) {
 			request.getSession().setAttribute("user", userName);
 			mav.addObject("permissions", permissionService.showPerssion());
-//			for(Permission per:permissionService.showPerssion()){
-//				System.out.println(per.getUrl());
-//			}
 			mav.setViewName("views/main");
 		}else {
 			mav.addObject("message","用户名或密码错误");
@@ -77,9 +54,7 @@ public class UserController {
 		String city=null==request.getParameter("city")?"":request.getParameter("city");
 		String email=null==request.getParameter("email")?"":request.getParameter("email");
 		String[] hobby =null==request.getParameterValues("hobby")?new String[] {}:request.getParameterValues("hobby");
-		
 		ModelAndView mav = new ModelAndView("login");
-		
 		String hobbyString = "";
 		if(hobby.length != 0) {
 			for(int i=0,len=hobby.length;i<len;i++) {
@@ -101,15 +76,8 @@ public class UserController {
 		return mav;
 	}
 	
-	//未加分页时的操作
-//	@RequestMapping("userInit")
-//	public ModelAndView userInit(@RequestParam(name="currentPage",defaultValue="1") String currentPage) {
-//		ModelAndView mav = new ModelAndView("views/userManager");
-//		List<UserForm> list = userService.showUser();
-//		System.out.println(list.toString());
-//		mav.addObject("list",list);
-//		return mav;
-//	}
+	//不加分页时的操作见下面的网址
+	//https://github.com/coymaple/SpringMvcDemo/blob/master2/README.md
 	
 	//有分页时的操作
 	@RequestMapping("userInit")
@@ -123,5 +91,13 @@ public class UserController {
 		mav.addObject("page",page);
 		return mav;
 	}
+	
+	//带有模糊查询的分页
+	//@RequestMapping("")
+	public ModelAndView userInitByQuery() {
+		ModelAndView mov = new ModelAndView();
+		return mov;
+	}
+	
 	
 }

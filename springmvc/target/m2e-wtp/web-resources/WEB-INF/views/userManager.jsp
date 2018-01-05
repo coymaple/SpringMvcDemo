@@ -20,7 +20,7 @@
 				<tr>
 					<td colspan="7" style="text-align: left;"><input type="search"
 						name="keyword" id="keyword">
-						<button class="simpleButton">查询</button></td>
+						<button class="simpleButton" id="btn_search">查询</button></td>
 				</tr>
 			</thead>
 			<tfoot>
@@ -36,10 +36,10 @@
 							第<span id="spanCurrentPage" >${page.currentPage }</span>页
 							&nbsp;&nbsp;每页${page.rowNumber }行&nbsp;&nbsp;
 							共<span id="spanTotalPage">${page.totalPage }页</span>
-							<button class="simpleButton">首页</button>
+							<button class="simpleButton" id="btn_firstPage">首页</button>
 							<button class="simpleButton" id="btn_previousPage">上一页</button>
 							<button class="simpleButton" id="btn_nextPage">下一页</button>
-							<button class="simpleButton">末页</button>
+							<button class="simpleButton" id="btn_lastPage">末页</button>
 						</nav>
 					</td>
 				</tr>

@@ -33,7 +33,6 @@ public class AppConfig {
 	
 	@Bean(name= {"driverManagerDataSource"})
 	public DriverManagerDataSource driverManagerDataSource() {
-//		System.out.println(environment.getProperty("jdbc.className"));
 		DriverManagerDataSource dmds = new DriverManagerDataSource();
 		dmds.setDriverClassName(environment.getProperty("jdbc.className"));
 		dmds.setUrl(environment.getProperty("jdbc.url"));

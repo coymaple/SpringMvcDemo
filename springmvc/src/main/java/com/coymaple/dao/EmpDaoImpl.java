@@ -48,7 +48,6 @@ public class EmpDaoImpl implements EmpDao{
 
 	@Override
 	public boolean deleteEmp(String name,Emp emp) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
